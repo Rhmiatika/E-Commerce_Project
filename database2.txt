@@ -1,0 +1,82 @@
+Microsoft Windows [Version 10.0.22621.1413]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Rahmi Atika>cd\
+
+C:\>cd xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 11
+Server version: 10.4.27-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use db_toko_alat_tulis;
+Database changed
+MariaDB [db_toko_alat_tulis]> SHOW TABLE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near '' at line 1
+MariaDB [db_toko_alat_tulis]> SHOW TABLES;
++------------------------------+
+| Tables_in_db_toko_alat_tulis |
++------------------------------+
+| merk                         |
+| pesanan                      |
++------------------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [db_toko_alat_tulis]> INSERT INTO pesanan (id, tanggal, produk_id, quantity) VALUES
+    -> (1, '2023-04-03', 5, 1);
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [db_toko_alat_tulis]> CREATE TABLE produk(
+    -> id int(11) not null,
+    -> nama varchar(191) not null,
+    -> stok int(11) not null,
+    -> harga int(45) not null,
+    -> merk_id int(45) not null
+    -> ) ENGINE=innoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [db_toko_alat_tulis]> INSERT INTO produk (id, nama, stok, harga, merk_id) VALUES
+    -> (5, 'Buku Tulis Isi 58 Lbr', 20, 5000, 1),
+    -> (6, 'Pensil 2B Joyko', 100, 2000, 2);
+Query OK, 2 rows affected (0.004 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [db_toko_alat_tulis]> ALTER TABLE merk ADD PRIMARY KEY (id);
+Query OK, 0 rows affected (0.037 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [db_toko_alat_tulis]> ALTER TABLE pesanan ADD PRIMARY KEY (id), ADD KEY fk_pesanan_1 (produk_id);
+Query OK, 0 rows affected (0.033 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [db_toko_alat_tulis]> ALTER TABLE produk ADD PRIMARY KEY (id), ADD KEY fk_produk1 (merk_id);
+Query OK, 0 rows affected (0.038 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [db_toko_alat_tulis]> ALTER TABLE merk MODIFY id int(11) not null AUTO_INCREMENT, AUTO_INCREMENT=5;
+Query OK, 4 rows affected (0.040 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [db_toko_alat_tulis]> ALTER TABLE pesanan MODIFY id int(11) not null AUTO_INCREMENT, AUTO_INCREMENT=2;
+Query OK, 1 row affected (0.050 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+MariaDB [db_toko_alat_tulis]> ALTER TABLE produk MODIFY id int(11) not null AUTO_INCREMENT, AUTO_INCREMENT=7;
+Query OK, 2 rows affected (0.085 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [db_toko_alat_tulis]> ALTER TABLE pesanan ADD CONSTRAINT fk_pesanan_1 FOREIGN KEY (produk_id) REFERENCES produk (id) ON DELETE CASCADE ON UPDATE CASCADE;
+Query OK, 1 row affected (0.042 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+MariaDB [db_toko_alat_tulis]> ALTER TABLE produk ADD CONSTRAINT fk_produk1 FOREIGN KEY (merk_id) REFERENCES merk (id) ON DELETE CASCADE ON UPDATE CASCADE;
+Query OK, 2 rows affected (0.046 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [db_toko_alat_tulis]>
