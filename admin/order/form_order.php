@@ -84,9 +84,13 @@ $barang6 = [
     'idd' =>20,
     'Barangg' => "2B 1pack",
 ];
+$barang7 = [
+  'idd' =>23,
+  'Barangg' => "Binder Joyko",
+];
 
 $ar_idbarang = [$barang1, $barang2, $barang3];
-$ar_idbarang2 = [$barang4, $barang5, $barang6];
+$ar_idbarang2 = [$barang4, $barang5, $barang6, $barang7];
 
 ?>
 

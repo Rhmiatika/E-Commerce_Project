@@ -26,6 +26,8 @@
                                         <th>Tanggal</th>
                                         <th>Produk</th>
                                         <th>Qty</th>
+                                        <th>Action</th>
+
                                         <!-- <th>Barang</th>
                                         <th>Alamat</th> -->
                                         <!-- <th>Action</th> -->
@@ -41,6 +43,10 @@
                                             <td><?=$row['tanggal']?></td>
                                             <td><?=$row['produk_id']?></td>
                                             <td><?=$row['quantity']?></td>
+                                            <td>
+                        <a class="btn btn-danger" href="delete_order.php?iddel=<?=$row['id']?>"
+                        onclick="if(!confirm('Anda Yakin Hapus Data Merk <?=$row['tanggal']?>?')) {return false}">Delete</a>
+                        </td>
                                         </tr>
                                     <?php 
                                     $nomor++;   
